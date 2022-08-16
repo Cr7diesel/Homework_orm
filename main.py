@@ -27,10 +27,10 @@ for record in data:
 session.commit()
 
 
-name = int(input('Введите id издателя: '))
+id = int(input('Введите id издателя: '))
 
-if name != 0:
-    q = session.query(Publisher).filter(Publisher.id == name)
+if id != 0:
+    q = session.query(Publisher).filter(Publisher.id == id)
     for n in q.all():
         print(n.name)
 else:

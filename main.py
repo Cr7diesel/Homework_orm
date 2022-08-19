@@ -27,13 +27,17 @@ for record in data:
 session.commit()
 
 
-id = int(input('Введите id издателя: '))
+publisher_id = int(input('Введите id издательства: '))
 
-if id != 0:
-    q = session.query(Publisher).filter(Publisher.id == id)
-    for n in q.all():
-        print(n.name)
+if 0 < publisher_id < 5:
+    q = session.query(Publisher).filter(Publisher.id == publisher_id).all()
+    for s in q:
+        print(f'Книги издательства {s.name} продаются в магазинах: ')
+    q1 = session.query(Shop).join(Stock).join(Book).join(Publisher).filter(Publisher.id == publisher_id).all()
+    for shop in q1:
+        print(shop.name)
 else:
     print('Вы ввели неверный id')
+
 
 session.close()
